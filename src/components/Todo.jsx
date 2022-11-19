@@ -3,16 +3,18 @@ import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
 import { TodoItem } from "./TodoItem";
 import { TodosInput } from "./TodosInput";
-
+import './todo.css'
 export const Todo = () => {
   const [todolist, setTodolist] = useState([]);
-  const postData = (todos) => {
-  
+  const [pending, setPending]=useState([])
+  const [completed,setCompleted]=useState([])
+const [completedTodo,setCompletedTodo]=useState('l');
+// const [pendingTodo, setPendingTodo]=useState(false)
+const postData = (todos) => {
     const payload = {
       todo: todos,
     };
     axios.post("https://analystt-api.herokuapp.com/todos",payload).then((res)=>{
-      console.log(res)
     }).catch((e)=>{
       console.log(e)
     })
@@ -20,59 +22,92 @@ export const Todo = () => {
   };
 
   const handleStatus =async(todo) => {
-  console.log(todo,todo._id,!todo.status)
-
-const payload = {
+  const payload = {
   status: !todo.status,
-};
-axios.patch(`https://analystt-api.herokuapp.com/${todo._id}`,payload).then((res)=>{
-  console.log(res)
+  };
+axios.patch(`https://analystt-api.herokuapp.com/todos/${todo._id}`,payload).then((res)=>{
   fetchTodos();
 }).catch((e)=>{
   console.log(e)
 })
 };
 
-  const removetodo = (id) => {
-  axios.delete(`https://analystt-api.herokuapp.com/${id}`).then((res)=>{
+const removetodo = (id) => {
+  axios.delete(`https://analystt-api.herokuapp.com/todos/${id}`).then((res)=>{
     fetchTodos()
   }).catch((e)=>{
     console.log(e)
   })
-  };
-  useEffect(()=>{
-    fetchTodos();
-  },[])
-  const fetchTodos=async()=>{
-  axios.get("https://analystt-api.herokuapp.com").then((res)=>{
-    console.log(res)
-    setTodolist(res.data)
+};
+  
+useEffect(()=>{
+    fetchTodos({completedTodo});
+},[])
+
+const fetchTodos=async()=>{
+  axios({
+    url:"https://analystt-api.herokuapp.com/todos",
+    method:"get",
+  }).then((res)=>{
+  setTodolist(res.data)
   }).catch((e)=>{
     console.log(e)
   })
-
   }
-  const fetchTodo=async(todo)=>{
-    axios.get(`https://analystt-api.herokuapp.com/${todo._id}`).then((res)=>{
-      console.log(res.data)
-      // setTodolist(res.data)
-    }).catch((e)=>{
-      console.log(e)
-    })
   
-    }
+useEffect(()=>{
+  axios.get(
+    `https://analystt-api.herokuapp.com/todos?search=true`
+    ).then((res)=>{
+    setCompleted(res.data)
+  }).catch((e)=>{
+    console.log(e)
+})
 
+},[])
+useEffect(()=>{
+  axios.get(
+    `https://analystt-api.herokuapp.com/todos?search=false`
+    ).then((res)=>{
+    setPending(res.data)
+  }).catch((e)=>{
+    console.log(e)
+})
+
+},[])
+const completedTodos=()=>{
+  setCompletedTodo(true);
+}
+const pendingTodos=()=>{
+  setCompletedTodo(false)
+}
+const allTodos=()=>{
+  setCompletedTodo('l')
+}
+var data;
+// {completedTodo ==true ? data=completed ?completedTodo ==false ? data = pending : data = todolist}
+if(completedTodo ==true){
+  data=completed;
+
+}else if(completedTodo==false){
+  data=pending
+
+}else if(completedTodo=='l'){
+  data=todolist
+}
   return (
     <div>
       <TodosInput datafn={postData} />
       <div>
-        {todolist.map((e,i) => {
+      <button className="status-btn" onClick={allTodos}>All : {todolist.length}</button>
+      <button className="status-btn" onClick={completedTodos}>Completed : {completed.length}</button>
+      <button className="status-btn" onClick={pendingTodos}>Pending : {pending.length}</button>
+        {data.map((e,i) => {
           return (
-            <div key={i}>
+            <div key={i} className='todo'>
               <TodoItem
                 handleStatus={handleStatus}
                 removetodo={removetodo}
-                fetchTodo={fetchTodo}
                 todo={e}
               />
             </div>

@@ -1,0 +1,82 @@
+.btn{
+    padding: 7px 40px;
+    border: 1px solid white;
+    outline: none;
+    margin:0px 10px;
+    background: teal;
+    color:white;
+    font-size: 12px;
+    font-weight: 300;
+    border-radius: 10px;
+   
+}
+.btn:hover{
+    color: teal;
+    background:white;
+    border: 1px solid teal;
+
+}
+.status-btn{
+    padding: 7px 20px;
+    border: 1px solid black;
+    outline: none;
+    margin:5px 10px;
+    background: white;
+    color:black;
+    font-size: 18px;
+    font-weight: 300;
+    border-radius: 10px;
+    
+}
+.status-btn:hover{
+    color: white;
+    /* border: 1px solid pink; */
+    background: black;
+
+}
+.tododiv{
+    display: flex;
+    width:800px;
+    align-items: center;
+    margin: auto;
+}
+.todo{
+    
+}
+.tododiv>div{
+    width:200px;
+    padding: 15px;
+    margin: 5px 0;
+border:1px solid black;
+}
+.tododiv>div:nth-child(3),.tododiv>div:nth-child(4){
+    width:200px;
+    padding: 11px;
+    margin: 5px 0;
+border:1px solid black;
+}
+input{
+    padding:10px 20px;
+    width:200px;
+    outline: none;
+    border-radius:10px;
+    background: white;
+    color:black;
+}
+.inputdiv{
+    /* border:1px solid black; */
+    margin:10px;
+    display: flex;
+    /* flex-direction: column; */
+    align-items:center;
+    justify-content: center;
+    border-radius:10px;
+  
+}
+.submitbtn{
+padding: 4px 20px;
+background: white;
+color:black;
+border-radius:10px;
+margin: 5px;
+}

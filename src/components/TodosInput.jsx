@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-
+import './todo.css'
 export const TodosInput = ({datafn}) => {
     const [text, setText] = useState("");
   return (
-    <div>
+    <div className='inputdiv'>
     <input
         onChange={(e) => {
           setText(e.target.value);
@@ -11,7 +11,7 @@ export const TodosInput = ({datafn}) => {
         type="text"
         placeholder="Add Todo"
       />
-      <button onClick={()=>{
+      <button className='submitbtn' onClick={()=>{
       datafn(text)
       }}>Add</button>
     </div>
