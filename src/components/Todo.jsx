@@ -15,6 +15,7 @@ const postData = (todos) => {
       todo: todos,
     };
     axios.post("https://analystt-api.herokuapp.com/todos",payload).then((res)=>{
+      fetchTodos();
     }).catch((e)=>{
       console.log(e)
     })
@@ -41,7 +42,7 @@ const removetodo = (id) => {
 };
   
 useEffect(()=>{
-    fetchTodos({completedTodo});
+    fetchTodos();
 },[])
 
 const fetchTodos=async()=>{
@@ -50,12 +51,16 @@ const fetchTodos=async()=>{
     method:"get",
   }).then((res)=>{
   setTodolist(res.data)
+  fetchTodos()
   }).catch((e)=>{
     console.log(e)
   })
   }
   
 useEffect(()=>{
+ comTodos()
+},[completed])
+const comTodos=()=>{
   axios.get(
     `https://analystt-api.herokuapp.com/todos?search=true`
     ).then((res)=>{
@@ -63,29 +68,33 @@ useEffect(()=>{
   }).catch((e)=>{
     console.log(e)
 })
-
-},[])
+}
 useEffect(()=>{
+ pendTodos()
+},[pending])
+const pendTodos=()=>{
   axios.get(
     `https://analystt-api.herokuapp.com/todos?search=false`
     ).then((res)=>{
     setPending(res.data)
+
   }).catch((e)=>{
     console.log(e)
 })
 
-},[])
+}
 const completedTodos=()=>{
   setCompletedTodo(true);
 }
 const pendingTodos=()=>{
   setCompletedTodo(false)
+
 }
 const allTodos=()=>{
   setCompletedTodo('l')
+  fetchTodos()
 }
 var data;
-// {completedTodo ==true ? data=completed ?completedTodo ==false ? data = pending : data = todolist}
 if(completedTodo ==true){
   data=completed;
 
