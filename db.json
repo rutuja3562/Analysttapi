@@ -1,49 +1,9 @@
 {
   "todos": [
     {
-      "title": "Learn Typescript",
-      "status": false,
-      "id": "bfK"
-    },
-    {
-      "title": "Learn Redux",
-      "status": false,
-      "id": "CpK"
-    },
-    {
-      "title": "mmm",
-      "status": false,
-      "id": "jqv"
-    },
-    {
-      "title": "kjkln",
-      "status": false,
-      "id": "-jm"
-    },
-    {
-      "title": "kjklnmlkkmllkm",
-      "status": false,
-      "id": "RfC"
-    },
-    {
-      "title": ",mm,,m ",
-      "status": false,
-      "id": "6Be"
-    },
-    {
-      "title": "llll",
-      "status": false,
-      "id": "YD7"
-    },
-    {
-      "title": ",,mkmkjk",
-      "status": false,
-      "id": "-2c"
-    },
-    {
-      "title": "mmm",
-      "status": false,
-      "id": "9BI"
+      "_id": "637879eb3d205beebdd7d8ec",
+      "todo": "Learn React",
+      "status": true
     }
   ]
 }
