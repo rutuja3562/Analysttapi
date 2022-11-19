@@ -11,13 +11,12 @@ export const Todo = () => {
     const payload = {
       todo: todos,
     };
-    axios.post("http://localhost:7005/todos",payload).then((res)=>{
+    axios.post("https://analystt-api.herokuapp.com/todos",payload).then((res)=>{
       console.log(res)
     }).catch((e)=>{
       console.log(e)
     })
     fetchTodos();
-    // setTodolist([...todolist, payload]);
   };
 
   const handleStatus =async(todo) => {
@@ -26,7 +25,7 @@ export const Todo = () => {
 const payload = {
   status: !todo.status,
 };
-axios.patch(`http://localhost:7005/todos/${todo._id}`,payload).then((res)=>{
+axios.patch(`https://analystt-api.herokuapp.com/${todo._id}`,payload).then((res)=>{
   console.log(res)
   fetchTodos();
 }).catch((e)=>{
@@ -35,21 +34,17 @@ axios.patch(`http://localhost:7005/todos/${todo._id}`,payload).then((res)=>{
 };
 
   const removetodo = (id) => {
-  axios.delete(`http://localhost:7005/todos/${id}`).then((res)=>{
-    // console.log(res)
-    // setTodolist(res.data)
+  axios.delete(`https://analystt-api.herokuapp.com/${id}`).then((res)=>{
     fetchTodos()
   }).catch((e)=>{
     console.log(e)
   })
   };
   useEffect(()=>{
-    // if(todolist.length==0){
     fetchTodos();
-    // }
   },[])
   const fetchTodos=async()=>{
-  axios.get("http://localhost:7005/todos").then((res)=>{
+  axios.get("https://analystt-api.herokuapp.com").then((res)=>{
     console.log(res)
     setTodolist(res.data)
   }).catch((e)=>{
@@ -58,7 +53,7 @@ axios.patch(`http://localhost:7005/todos/${todo._id}`,payload).then((res)=>{
 
   }
   const fetchTodo=async(todo)=>{
-    axios.get(`http://localhost:7005/todos/${todo._id}`).then((res)=>{
+    axios.get(`https://analystt-api.herokuapp.com/${todo._id}`).then((res)=>{
       console.log(res.data)
       // setTodolist(res.data)
     }).catch((e)=>{
@@ -66,7 +61,7 @@ axios.patch(`http://localhost:7005/todos/${todo._id}`,payload).then((res)=>{
     })
   
     }
-  // `http://localhost:7005/todos/${todo._id}`
+
   return (
     <div>
       <TodosInput datafn={postData} />
